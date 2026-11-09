@@ -1,0 +1,75 @@
+
+openapi: 3.0.3
+info:
+  title: API de Consulta de Ventas - Odoo 19
+  version: 1.0.0
+  description: >
+    API para consultar los pedidos de venta confirmados
+    de un cliente durante un mes.
+
+servers:
+  - url: http://localhost:8069
+
+paths:
+  /api/consulta-ventas:
+    get:
+      summary: Consultar ventas mensuales de un cliente
+      description: >
+        Requiere una sesión autenticada de Odoo y
+        permisos de usuario de Ventas.
+      operationId: consultarVentas
+      parameters:
+        - name: cliente_id
+          in: query
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+        - name: anio
+          in: query
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 9999
+        - name: mes
+          in: query
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 12
+
+      responses:
+        '200':
+          description: Consulta realizada correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cliente:
+                    type: string
+                  anio:
+                    type: integer
+                  mes:
+                    type: integer
+                  cantidad_ventas:
+                    type: integer
+                  total_compras:
+                    type: number
+              example:
+                cliente: Cliente prueba
+                anio: 2026
+                mes: 11
+                cantidad_ventas: 1
+                total_compras: 118.0
+
+        '400':
+          description: Parámetros ausentes o inválidos
+
+        '403':
+          description: Usuario sin permisos de Ventas
+
+        '404':
+          description: Cliente no encontrado

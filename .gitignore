@@ -1,0 +1,29 @@
+
+# Archivos temporales de Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# Configuraciones privadas de Odoo
+odoo.conf
+*.conf
+odoo*.txt
+
+# Credenciales y variables de entorno
+.env
+.env.*
+*.pem
+*.key
+
+# Registros y archivos temporales
+*.log
+*.bak
+*.tmp
+
+# Configuracion local de VS Code
+.vscode/
